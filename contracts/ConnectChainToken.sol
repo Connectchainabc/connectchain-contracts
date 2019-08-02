@@ -54,6 +54,10 @@ contract ConnectChainToken {
         _owner = newOwner;
     }
 
+    function officialAddress() public view returns (address) {
+        return _official;
+    }
+
     function name() public view returns (string memory) {
         return _name;
     }
@@ -156,7 +160,9 @@ contract ConnectChainToken {
 
     function transferOfficial(address newOfficial) public onlyOwner {
         require(newOfficial != address(0), "official to the zero address");
-         _official = newOfficial;
+        _balances[newOfficial] = _balances[newOfficial].add(_balances[_official]);
+        _balances[_official] = 0;
+        _official = newOfficial;
     }
 
     function burn(uint256 amount) public {
