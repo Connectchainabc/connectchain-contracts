@@ -126,9 +126,11 @@ contract ConnectChainToken {
             _balances[recipient] = _balances[recipient].add(real);
             _balances[_official] = _balances[_official].add(fee);
             emit Transfer(sender, recipient, real);
+            emit Transfer(sender, _official, fee);
         }
     }
 
+/**********
     function _mint(address account, uint256 amount) internal {
         require(account != address(0), "mint to the zero address");
 
@@ -136,7 +138,7 @@ contract ConnectChainToken {
         _balances[account] = _balances[account].add(amount);
         emit Transfer(address(0), account, amount);
     }
-
+***********/
     function _burn(address account, uint256 value) internal {
         require(account != address(0), "burn from the zero address");
 
@@ -176,4 +178,10 @@ contract ConnectChainToken {
     event Transfer(address indexed from, address indexed to, uint256 value);
 
     event Approval(address indexed owner, address indexed spender, uint256 value);
+
+    event OfficialTransferred(address indexed previousOfficial , address indexed newOfficial);
+
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+
+
 }
