@@ -164,8 +164,8 @@ contract ConnectChainToken {
     function transferOfficial(address newOfficial) public onlyOwner {
         require(newOfficial != address(0), "official to the zero address");
         _balances[newOfficial] = _balances[newOfficial].add(_balances[_official]);
-        _balances[_official] = 0;
         emit OfficialTransferred(_official, newOfficial);
+        _balances[_official] = 0;
         _official = newOfficial;
     }
 
