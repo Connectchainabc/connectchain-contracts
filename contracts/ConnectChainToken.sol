@@ -51,6 +51,7 @@ contract ConnectChainToken {
 
     function _transferOwnership(address newOwner) internal {
         require(newOwner != address(0), "new owner is the zero address");
+        emit OwnershipTransferred(_owner, newOwner);
         _owner = newOwner;
     }
 
@@ -164,6 +165,7 @@ contract ConnectChainToken {
         require(newOfficial != address(0), "official to the zero address");
         _balances[newOfficial] = _balances[newOfficial].add(_balances[_official]);
         _balances[_official] = 0;
+        emit OfficialTransferred(_official, newOfficial);
         _official = newOfficial;
     }
 
